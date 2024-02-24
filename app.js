@@ -6,7 +6,7 @@ const passport = require("passport")
  
 const mongoose = require("mongoose")
  
- 
+const indexRoute = require("./src/indexRoute")
 const memberRouter = require('./src/memberRoute')
 
 mongoose.set("strictQuery", false)
@@ -26,7 +26,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.urlencoded({extended:false}))
 
-app.use('/', memberRouter)
+app.use('/', indexRoute)
+app.use('/member', memberRouter)
 /* app.get("/",(req,res) => res.render("index")) 
 
 app.get("/sign-up", (req,res) => res.render('sign-up'))

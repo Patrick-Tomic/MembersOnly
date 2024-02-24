@@ -56,10 +56,10 @@ exports.signup_post = [
         }
     }).escape(),
     body("password", 'Password must be 6 characters long and contain a number and uppercase')
-    .trim().isLength({min:6}).escape(),
-    body("confirmPassword", 'Repeat your password').trim().custom((value, {req}) =>{
-        value === req.body.password ? console.log('works') : new Error('Password doesnt match')
-    }).escape()
+    .trim().isLength({min:6}),
+    body("confirmPassword").custom((value, {req}) =>{
+        return value === req.body.password
+    }) 
 , asyncHandler(async (req,res,next) => {
     const errors = validationResult(req)
     const hash = await bcrypt.hash(req.body.password, 10)
@@ -74,8 +74,8 @@ exports.signup_post = [
         res.render('sign-up', {errors:errors.array()})
         return
     } else {
-        const result = await member.save()
-        res.render("index",{member})
+        const result = await member.save().done(res.redirect('/'))
+         
     }
 })
 ]
