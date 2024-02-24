@@ -16,16 +16,22 @@
 
     <form action="" method="post">
         <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" id="">
+        <input required type="text" name="firstName" id="">
         <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" id="">
+        <input required type="text" name="lastName" id="">
         <label for="username">Username</label>
-        <input type="text" name="username" id="">
+        <input required type="text" name="username" id="">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="">
+        <input required type="password" name="password" id="">
         <label for="confirmPassword">Reenter Password:</label>
-        <input type="password" name="confirmPassword" id="">
+        <input required type="password" name="confirmPassword" id="">
         <button type="submit">Submit</button>
     </form>
+
+    <%if(errors.length) { %>
+        <%errors.forEach((error) => { %>
+            <p style="color: red;"><%=error.msg%></p>
+        <%})%>
+    <%}%>
 </body>
 </html>
