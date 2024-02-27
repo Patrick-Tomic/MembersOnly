@@ -12,15 +12,31 @@
     <%if(user){%>
         <div style="display: flex; justify-content:space-between; width: 15vw;">
         <h2>Hello <%=user.firstName%></h2>
-        <%}%>
-        <button class="sendBtn">Message</button>
+        
+        <a href="/member/message"><button class="sendBtn">Message</button></a>
         </div>
-    <div>
+        <%} %>
+    <div class="btnDiv" >
+        <%if(!user){%>
        <a href="/member/login"> <button>Log-in</button></a>
         <a href="/member/sign-up"><button>Sign up</button></a>
+        <%} else{%>
+            <button>Logout</button>
+            <%}%>
     </div>
+   
 </header>
-
+<main>
+    <div>
+        <% messages.forEach((message) => {%>
+            <div>
+                <h1><%=message.heading%></h1>
+                <p><%=message.content%><br>-<%=message.author.username%></p>
+                <h5><%=message.date%></h5>
+            </div>
+        <%})%>
+    </div>
+</main>
      
 </body>
 </html>
