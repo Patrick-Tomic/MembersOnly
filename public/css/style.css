@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: gray;
+}
+
+/*# sourceMappingURL=style.css.map */

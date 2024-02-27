@@ -1,49 +1,17 @@
 const Member = require('./models/memberModel')
-const bcrypt = require("bcryptjs")
-const {body, validationResult} = require("express-validator")
+const {body, validationResult} = require("express-validator") 
 const asyncHandler = require("express-async-handler")
-const passport = require("passport")
-const LocalStrategy = require("passport-local").Strategy
+const bcrypt = require("bcryptjs")
 
-passport.use(
-    new LocalStrategy(async(username, password, done) => {
-        try {
-            const user = await Member.findOne({username:username})
-            if(!user) {
-                return done(null, false, {message: "Incorrect Username"})
-            }
-            const match = await bcrypt.compare(password, user.password)
-                if(!match) {
-                     return done(null, false, 'Incorrect Password')
-                }
-                return done(null, user)
-            } catch(err) {
-                return done(err)
-            }
-    })
-)
-
-passport.serializeUser((user, done) => {
-    done(null, user.id)
-})
-
-passport.deserializeUser(async (id, done) => {
-    try{
-        const user = await Member.findById(id)
-        done(null, user)
-    } catch(err) {
-        done(err)
-    }
-})
 
 exports.index = asyncHandler(async (req, res, next) => {
-    res.render("index")
+    res.render("./views/index")
 })
 
 exports.signup_get = asyncHandler( async(req,res,next) => {
-    res.render('sign-up', {errors:[]})
-})
-
+    res.render('./views/sign-up', {errors:[]})
+}) 
+ 
 exports.signup_post = [
     body("firstName", "Please fill in the input").trim()
     .isLength({min:1}).escape(),
@@ -71,7 +39,7 @@ exports.signup_post = [
     })
 
     if(!errors.isEmpty()) {
-        res.render('sign-up', {errors:errors.array()})
+        res.render('./views/sign-up', {errors:errors.array()})
         return
     } else {
         const result = await member.save().done(res.redirect('/'))
@@ -79,3 +47,7 @@ exports.signup_post = [
     }
 })
 ]
+
+exports.login_get = asyncHandler(async (req, res, next) => {
+    res.render("./views/login")
+})
