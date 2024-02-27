@@ -13,7 +13,7 @@ router.post('/sign-up', app.signup_post)
 router.get('/login', app.login_get)
 router.post("/login", passport.authenticate('local', {
     successRedirect:'/',
-    failureRedirect:"/login",
+    failureRedirect:"/member/login",
     failureFlash:true
 }))
 module.exports = router

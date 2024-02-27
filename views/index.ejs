@@ -9,6 +9,9 @@
 <body>
 <header>
     <h1>Members Only</h1>
+    <%if(user){%>
+        <h2>Hello <%=user.firstName%>
+        <%}%>
     <div>
        <a href="/member/login"> <button>Log-in</button></a>
         <a href="/member/sign-up"><button>Sign up</button></a>

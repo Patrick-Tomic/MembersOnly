@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs")
 
 
 exports.index = asyncHandler(async (req, res, next) => {
-    res.render("./views/index")
+    res.render("./views/index", {user:req.user})
 })
 
 exports.signup_get = asyncHandler( async(req,res,next) => {
