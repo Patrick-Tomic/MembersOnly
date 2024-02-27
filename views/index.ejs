@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
+   <link rel="stylesheet" href="css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-<header>
+<header  >
     <h1>Members Only</h1>
     <%if(user){%>
-        <h2>Hello <%=user.firstName%>
+        <div style="display: flex; justify-content:space-between; width: 15vw;">
+        <h2>Hello <%=user.firstName%></h2>
         <%}%>
+        <button class="sendBtn">Message</button>
+        </div>
     <div>
        <a href="/member/login"> <button>Log-in</button></a>
         <a href="/member/sign-up"><button>Sign up</button></a>
